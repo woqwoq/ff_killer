@@ -87,19 +87,22 @@ def evaluate_truth_table(expr: str):
     calcs = []
 
 
+    #Changing set's notation's '/' to ~^ as they are equivalent
     expr = replace_and_not(expr)
 
+    #Getting a list of all prime propositions in the expression
     prime_propositions = count_prime_propositions(expr)
 
-    #Getting max number binary number for calculating combinations
-    numtoget = pow(2, len(prime_propositions))
-
+    #Creating an empty 2d array
     exprs = create_2d_array(len(prime_propositions))
 
+    #Filling the 2d array with combinations such as 0 0 0, 0 0 1
     exprs = generate_binary_combinations(exprs, prime_propositions)
 
+    #Interchanging the combinations from 2d array into the expression as follows: 0 0 1 -> 0 n 0 v 1
     calcs = generate_expressions_from_combinations(expr, prime_propositions, exprs)
 
+    #Evaluating the final result
     exprs = calculate_expression(exprs, calcs)
 
     #Printing out
